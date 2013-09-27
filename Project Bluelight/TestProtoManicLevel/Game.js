@@ -29,6 +29,8 @@ var cTime = startTime;
 //Player
 var playerImg = new Image();
 playerImg.src = "square.png";
+var pwidth = playerImg.clientWidth;
+var pheight = playerImg.clientHeight;
 var posX = 360-32;
 var posY = 240;
 var rightKeyDown = false;
@@ -43,6 +45,71 @@ var friction = 0.8;
 
 //Platforms
 var platformGravity = 0;
+var platformImg = new Image();
+platformImg.src = "platform.png";
+var plX = 720 - 64;
+var plY = 360;
+var plwidth = platformImg.clientWidth;
+var plheight = platformImg.clientHeight;
+function platform(x, y)
+{
+    this.plx = x;
+    this.ply = y;
+    this.getx = function ()
+    {
+        return this.plx;
+    }
+    this.gety = function()
+    {
+        return this.ply;
+    }
+    this.setpos = function(a, b)
+    {
+        this.plx = a;
+        this.ply = b;
+    }
+    this.sety = function(l)
+    {
+        this.ply = l;
+    }
+    this.break = function()
+    {
+        if(this.plx < 360)
+        {
+        this.setpos((360 * math.random()), -32);
+        }
+        if(this.plx > 360)
+        {
+            var check;
+            while(check > (720 - plwidth))
+            {
+                check = 360 * (1 +math.random());
+            }
+            this.setpos(check, -32);
+        }
+    }
+    this.collision = function(px, py)
+    {
+        //check for collision between player and platform
+        var plw = plwidth;
+        var plh = plheight;
+        var pw = pwidth;
+        var ph = pheight;
+        var plx = this.plx;
+        var ply = this.ply;
+
+        if((px < (plx +plw) && px > plx) || ((px+pw) < (plx +plw) && (px +pw) > plx))
+        {
+            if(((py+ph) > (ply + plh)) && ((py+ph) <= (ply)))
+            {
+                upSpeed+= jumpStrength;
+                this.break();
+            }
+        }
+
+    }
+}
+                                                    var p1 = platform(400, 360);
 
 //Debug
 ctx.font = "32px Verdana";
@@ -98,6 +165,8 @@ Game.draw = function()
       //  }
         ctx.drawImage(playerImg,posX,posY);
         ctx.fillText((cTime).toString(),360 - 15,50);
+
+        ctx.drawImage(platformImg, p1.getx(), p1.gety()); // draw platform 1
     }
 }
 
@@ -149,6 +218,10 @@ Game.update = function()
         upSpeed = 0;
     }
 
+    if(platformGravity > 0)
+    {
+        p1.sety(p1.gety() - platformGravity);
+    }
 
     if(endManic)
     {
@@ -156,7 +229,11 @@ Game.update = function()
         //Be sure to play transition before doing this.
         clearInterval(Game._intervalId);
     }
+
 }
+
+
+
 
 function keyDownListener(e)
 {
