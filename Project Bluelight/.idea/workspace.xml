@@ -5,7 +5,7 @@
     <ignored path="Project Bluelight.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/stylesheet.css" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1379386289105" ignored="false" />
-    <file path="/Game.js" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1380313378889" ignored="false" />
+    <file path="/Game.js" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1380313997616" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +37,7 @@
       <file leaf-file-name="Game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestProtoManicLevel/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="205" column="38" selection-start="4741" selection-end="4741" vertical-scroll-proportion="0.67608476">
+            <state line="85" column="36" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.5317861">
               <folding />
             </state>
           </provider>
@@ -299,7 +299,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TestProtoManicLevel/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="38" selection-start="4741" selection-end="4741" vertical-scroll-proportion="0.67608476">
+        <state line="85" column="36" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.5317861">
           <folding />
         </state>
       </provider>

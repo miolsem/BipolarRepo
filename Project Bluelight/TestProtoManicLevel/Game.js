@@ -15,6 +15,10 @@ var ctx=c.getContext("2d");
 //Variables//
 /////////////////////////////////////////////////////////////////////
 
+function nonsense()
+{
+    alert("THIS FUNCTION DOES NOTHING!!!");
+}
 //Fractal Background & Reveal
 var backgroundImg = new Image();
 var pixelArray = createArray(720,480);
@@ -79,6 +83,7 @@ function platform(x, y)
             this.setpos(((360 * (1 + Math.random())) -96), -offset);          //96= width
         }
         offset += 80;
+        //HI! I"M ADDING A COMMENT!!
     }
     this.collision = function()
     {
