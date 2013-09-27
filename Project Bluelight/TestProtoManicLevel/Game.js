@@ -15,10 +15,6 @@ var ctx=c.getContext("2d");
 //Variables//
 /////////////////////////////////////////////////////////////////////
 
-function nonsense()
-{
-    alert("THIS FUNCTION DOES NOTHING!!!");
-}
 //Fractal Background & Reveal
 var backgroundImg = new Image();
 var pixelArray = createArray(720,480);
@@ -45,7 +41,7 @@ var maxPlayerSpeed = 6;
 var upSpeed = 0;
 var gravity = 2;
 var jumpStrength = 20;
-var friction = 0.8;
+var friction = 1;
 
 //Platforms
 var platformGravity = 0;
@@ -57,10 +53,16 @@ var platwidth = 96;
 var platheight = 32;
 var offset = 80;
 var gravcheck = 0;
+
+//Person
+var personImg = new Image();
+personImg.src = "person.png";
+var personCounter = 6;
 function platform(x, y)
 {
     this.plx = x;
     this.ply = y;
+    this.personCheck = false;
 
     this.setpos = function(a, b)
     {
@@ -83,7 +85,29 @@ function platform(x, y)
             this.setpos(((360 * (1 + Math.random())) -96), -offset);          //96= width
         }
         offset += 80;
-        //HI! I"M ADDING A COMMENT!!
+        personCounter--;
+        if(person1.broken == 1)
+        {
+
+            if(this.personCheck == true)
+            {
+                this.personCheck = false;
+                person1.broken = 0;
+            }
+        }
+        if(personCounter <= 0)
+        {
+
+             if(person1.broken == 2)
+            {
+                person1.persx = this.plx;
+                person1.persy = this.ply;
+                this.personCheck = true;
+                person1.broken = 1;
+                personCounter = 6;
+            }
+        }
+
     }
     this.collision = function()
     {
@@ -106,6 +130,31 @@ function platform(x, y)
 
     }
 }
+//Establishes the person "class"
+function person(x,y,num)
+{
+    this.persx = x;
+    this.persy = y;
+    this.speed = 3;
+    this.broken = num;
+    this.fall = function()
+    {
+        this.broken = 0;
+
+        if(this.persy <=480)
+        {
+            this.speed ++;
+            this.persy += this.speed;
+        }
+        else
+        {
+            this.broken = 2;
+            this.speed = 3;
+
+        }
+
+    }
+}
 //Create all the platforms
 var p1 = new platform(400, 270);
 var p2 = new platform(100, 100);
@@ -113,6 +162,8 @@ var p3 = new platform(600, 410);
 var p4 = new platform(3, 350);
 var p5 = new platform(500, 50);
 
+//Create the person
+var person1 = new person(-200, 500, 2);
 
 //Debug
 ctx.font = "32px Verdana";
@@ -172,6 +223,7 @@ Game.draw = function()
         ctx.drawImage(platformImg, p3.plx, p3.ply); // draw platform 3
         ctx.drawImage(platformImg, p4.plx, p4.ply); // draw platform 4
         ctx.drawImage(platformImg, p5.plx, p5.ply); // draw platform 5
+        ctx.drawImage(personImg, person1.persx, person1.persy); // draw person1
         ctx.drawImage(playerImg,posX,posY);
 
         ctx.fillText((cTime).toString(),360 - 15,50);
@@ -270,10 +322,23 @@ Game.update = function()
         p3.sety(p3.ply + platformGravity);
         p4.sety(p4.ply + platformGravity);
         p5.sety(p5.ply + platformGravity);
+        if(person1.broken == 1)
+        {
+            person1.persy += platformGravity;
+            if(person1.persy >= 480)
+            {
+                person1.broken = 2;
+            }
+        }
+
         if( offset > 80)
         {
             offset -= platformGravity;
         }
+    }
+    if(person1.broken == 0)
+    {
+        person1.fall();
     }
 
     if(endManic)
@@ -303,7 +368,8 @@ function keyDownListener(e)
         rightKeyDown = true;
         if(playerSpeed < 0)
         {
-            playerSpeed ++;
+            playerSpeed = maxPlayerSpeed
+           // playerSpeed ++;
         }
         else
         {
@@ -320,7 +386,8 @@ function keyDownListener(e)
         leftKeyDown = true;
         if(playerSpeed > 0)
         {
-            playerSpeed --;
+            playerSpeed = -maxPlayerSpeed;
+            //playerSpeed --;
         }
         else
         {

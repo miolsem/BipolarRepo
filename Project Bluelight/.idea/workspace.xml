@@ -5,7 +5,7 @@
     <ignored path="Project Bluelight.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/stylesheet.css" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1379386289105" ignored="false" />
-    <file path="/Game.js" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1380313997616" ignored="false" />
+    <file path="/Game.js" changelist="3d8aa03e-a07f-4a53-b0b3-e50971044116" time="1380321028589" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +28,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="43" selection-start="251" selection-end="251" vertical-scroll-proportion="-5.8846154">
+            <state line="9" column="43" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -37,7 +37,7 @@
       <file leaf-file-name="Game.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TestProtoManicLevel/Game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="36" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.5317861">
+            <state line="104" column="39" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.61654896">
               <folding />
             </state>
           </provider>
@@ -46,7 +46,7 @@
       <file leaf-file-name="stylesheet.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stylesheet.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="34" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+            <state line="4" column="1" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -100,6 +100,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -134,7 +135,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,7 +188,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -276,9 +276,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stylesheet.css">
+    <entry file="file://$PROJECT_DIR$/TestProtoManicLevel/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="34" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+        <state line="85" column="36" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -292,14 +292,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="43" selection-start="251" selection-end="251" vertical-scroll-proportion="-5.8846154">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="34" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stylesheet.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="1" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="43" selection-start="251" selection-end="251" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestProtoManicLevel/Game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="36" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.5317861">
+        <state line="104" column="39" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.61654896">
           <folding />
         </state>
       </provider>
