@@ -29,8 +29,8 @@ var cTime = startTime;
 //Player
 var playerImg = new Image();
 playerImg.src = "square.png";
-var pwidth = playerImg.clientWidth;
-var pheight = playerImg.clientHeight;
+var playerwidth = playerImg.clientWidth;
+var playerheight = playerImg.clientHeight;
 var posX = 360-32;
 var posY = 240;
 var rightKeyDown = false;
@@ -49,20 +49,15 @@ var platformImg = new Image();
 platformImg.src = "platform.png";
 var plX = 720 - 64;
 var plY = 360;
-var plwidth = platformImg.clientWidth;
-var plheight = platformImg.clientHeight;
+var platwidth = 96;
+var platheight = 32;
+var offset = 80;
+var gravcheck = 0;
 function platform(x, y)
 {
     this.plx = x;
     this.ply = y;
-    this.getx = function ()
-    {
-        return this.plx;
-    }
-    this.gety = function()
-    {
-        return this.ply;
-    }
+
     this.setpos = function(a, b)
     {
         this.plx = a;
@@ -72,44 +67,47 @@ function platform(x, y)
     {
         this.ply = l;
     }
-    this.break = function()
+    this.smash = function()
     {
-        if(this.plx < 360)
-        {
-        this.setpos((360 * math.random()), -32);
-        }
         if(this.plx > 360)
         {
-            var check;
-            while(check > (720 - plwidth))
-            {
-                check = 360 * (1 +math.random());
-            }
-            this.setpos(check, -32);
+        this.setpos((360 * Math.random()), -offset);
         }
+        else if(this.plx < 360)
+        {
+
+            this.setpos(((360 * (1 + Math.random())) -96), -offset);          //96= width
+        }
+        offset += 80;
     }
-    this.collision = function(px, py)
+    this.collision = function()
     {
         //check for collision between player and platform
-        var plw = plwidth;
-        var plh = plheight;
-        var pw = pwidth;
-        var ph = pheight;
-        var plx = this.plx;
-        var ply = this.ply;
 
-        if((px < (plx +plw) && px > plx) || ((px+pw) < (plx +plw) && (px +pw) > plx))
+
+        if(((posX < (this.plx +96)) && (posX > this.plx)) || (((posX+32) < (this.plx +96)) && ((posX +32) > this.plx)))
         {
-            if(((py+ph) > (ply + plh)) && ((py+ph) <= (ply)))
+
+            if(((posY+32) < (this.ply + 32)) && ((posY+32) > (this.ply)))
             {
-                upSpeed+= jumpStrength;
-                this.break();
+                if(upSpeed <= 0)
+                {
+
+                upSpeed+= jumpStrength * 1.1;
+                this.smash();
+                }
             }
         }
 
     }
 }
-                                                    var p1 = platform(400, 360);
+//Create all the platforms
+var p1 = new platform(400, 270);
+var p2 = new platform(100, 100);
+var p3 = new platform(600, 410);
+var p4 = new platform(3, 350);
+var p5 = new platform(500, 50);
+
 
 //Debug
 ctx.font = "32px Verdana";
@@ -128,6 +126,7 @@ document.onkeyup = keyUpListener;
 Game.timerTick = function()
 {
     cTime--;
+
     if(cTime < 0)
     {
         //Transition to depression phase.
@@ -163,10 +162,16 @@ Game.draw = function()
         //        ctx.clearRect(x,y,10,10);
         //    }
       //  }
+        ctx.drawImage(platformImg, p1.plx, p1.ply); // draw platform 1
+        ctx.drawImage(platformImg, p2.plx, p2.ply); // draw platform 2
+        ctx.drawImage(platformImg, p3.plx, p3.ply); // draw platform 3
+        ctx.drawImage(platformImg, p4.plx, p4.ply); // draw platform 4
+        ctx.drawImage(platformImg, p5.plx, p5.ply); // draw platform 5
         ctx.drawImage(playerImg,posX,posY);
+
         ctx.fillText((cTime).toString(),360 - 15,50);
 
-        ctx.drawImage(platformImg, p1.getx(), p1.gety()); // draw platform 1
+
     }
 }
 
@@ -198,7 +203,9 @@ Game.update = function()
     }
     if(posY >= 480)
     {
-        upSpeed += jumpStrength * 1.2;
+        upSpeed += jumpStrength * 1.25;
+        platformGravity = 4;
+        gravcheck = 30;
     }
 
     if(posY <= 120)
@@ -209,7 +216,16 @@ Game.update = function()
     else
     {
         gravity = 2
-        platformGravity = 0;
+             if(gravcheck > 0)
+             {
+            platformGravity =4;
+             }
+        else
+             {
+                 platformGravity = 0;
+             }
+        gravcheck --;
+
     }
     posY += gravity - upSpeed;
     upSpeed--;
@@ -217,10 +233,42 @@ Game.update = function()
     {
         upSpeed = 0;
     }
-
+    p1.collision(posX, posY);
+    p2.collision(posX, posY);
+    p3.collision(posX, posY);
+    p4.collision(posX, posY);
+    p5.collision(posX, posY);
+    if(p1.ply > 480)
+    {
+        p1.smash();
+    }
+    if(p2.ply > 480)
+    {
+        p2.smash();
+    }
+    if(p3.ply > 480)
+    {
+        p3.smash();
+    }
+    if(p4.ply > 480)
+    {
+        p4.smash();
+    }
+    if(p5.ply > 480)
+    {
+        p5.smash();
+    }
     if(platformGravity > 0)
     {
-        p1.sety(p1.gety() - platformGravity);
+        p1.sety(p1.ply + platformGravity);
+        p2.sety(p2.ply + platformGravity);
+        p3.sety(p3.ply + platformGravity);
+        p4.sety(p4.ply + platformGravity);
+        p5.sety(p5.ply + platformGravity);
+        if( offset > 80)
+        {
+            offset -= platformGravity;
+        }
     }
 
     if(endManic)
@@ -248,7 +296,14 @@ function keyDownListener(e)
     if((e.keyCode == 68 || e.keyCode == 39))
     {
         rightKeyDown = true;
-        playerSpeed++;
+        if(playerSpeed < 0)
+        {
+            playerSpeed ++;
+        }
+        else
+        {
+            playerSpeed = maxPlayerSpeed;
+        }
         if(playerSpeed > maxPlayerSpeed)
         {
             playerSpeed = maxPlayerSpeed;
@@ -258,7 +313,14 @@ function keyDownListener(e)
     else if((e.keyCode == 65 || e.keyCode == 37))
     {
         leftKeyDown = true;
-        playerSpeed--;
+        if(playerSpeed > 0)
+        {
+            playerSpeed --;
+        }
+        else
+        {
+            playerSpeed = -maxPlayerSpeed;
+        }
         if(playerSpeed < -maxPlayerSpeed)
         {
             playerSpeed = -maxPlayerSpeed;
