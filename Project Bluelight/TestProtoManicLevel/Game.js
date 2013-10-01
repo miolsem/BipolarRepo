@@ -267,12 +267,12 @@ Game.update = function()
 
     if(posY <= 120)
     {
-        gravity = 4;
+        gravity = 6;
         platformGravity = 4;
     }
     else
     {
-        gravity = 4
+        gravity = 2
              if(gravcheck > 0)
              {
             platformGravity =4;
